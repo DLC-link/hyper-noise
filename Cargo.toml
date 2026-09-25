@@ -1,6 +1,6 @@
 [package]
 name = "hyper-noise"
-version = "0.0.1"
+version = "0.0.3"
 edition = "2021"
 authors = ["conduition <conduition@proton.me>"]
 description = "A Noise protocol encryption layer on top of hyper HTTP servers and clients."
@@ -12,7 +12,7 @@ keywords = ["noise", "hyper", "snow", "http", "https"]
 tokio = { version = "1", default-features = false, features = ["io-util", "net"] }
 log = { version = "0.4", default-features = false }
 hyper = { version = "0.14", features = ["full"] }
-tokio-noise = "0.0.4"
+tokio-noise = "0.0.5"
 
 [dev-dependencies]
 tokio = { version = "1", default-features = false, features = ["macros"] }
