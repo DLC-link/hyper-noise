@@ -1,0 +1,9 @@
+# cargo-deny configuration. The CI job runs `cargo-deny check advisories`
+# only. Bans, licenses, and sources need policy decisions first.
+
+[advisories]
+ignore = [
+  # hyper 0.14 with the `full` feature set pulls in h2 0.3. See
+  # .cargo/audit.toml for the full reasoning.
+  { id = "RUSTSEC-2026-0258", reason = "h2 0.3 has no patched release (fix is in 0.4.16); pulled in by hyper 0.14 full, which this crate is built on" },
+]
