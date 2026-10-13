@@ -1,0 +1,16 @@
+# cargo-audit reads Cargo.lock directly and flags every advisory it finds,
+# even for crates behind features that are off and never compile. Each ignore
+# here says why the finding is safe to skip. deny.toml holds the cargo-deny
+# side of any finding that both tools report.
+
+[advisories]
+ignore = [
+  # h2 0.3 accepts and queues empty DATA frames without limit (low severity:
+  # unbounded memory, or a panic if the length overflows). The 0.3 line has no
+  # fix: 0.3.27 is its last release, and the patch landed only in 0.4.16.
+  # This crate is built on hyper 0.14 and asks for its `full` feature set,
+  # which includes http2 and so h2 0.3. Narrowing the hyper features would
+  # change what this library offers its users, and h2 0.4 needs a port to
+  # hyper 1. Drop this ignore when the crate moves to hyper 1.
+  "RUSTSEC-2026-0258",
+]
