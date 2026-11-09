@@ -1,2 +1,4 @@
 /target
 Cargo.lock
+# Claude Code local permission rules can contain approved secrets
+**/.claude/settings.local.json
