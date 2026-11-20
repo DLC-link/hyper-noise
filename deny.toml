@@ -3,7 +3,12 @@
 
 [advisories]
 ignore = [
-  # hyper 0.14 with the `full` feature set pulls in h2 0.3. See
-  # .cargo/audit.toml for the full reasoning.
+  # h2 0.3 accepts and queues empty DATA frames without limit (low severity:
+  # unbounded memory, or a panic if the length overflows). The 0.3 line has no
+  # fix: 0.3.27 is its last release, and the patch landed only in 0.4.16.
+  # This crate is built on hyper 0.14 and asks for its `full` feature set,
+  # which includes http2 and so h2 0.3. Narrowing the hyper features would
+  # change what this library offers its users, and h2 0.4 needs a port to
+  # hyper 1. Drop this ignore when the crate moves to hyper 1.
   { id = "RUSTSEC-2026-0258", reason = "h2 0.3 has no patched release (fix is in 0.4.16); pulled in by hyper 0.14 full, which this crate is built on" },
 ]
